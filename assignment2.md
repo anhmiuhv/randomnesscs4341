@@ -12,30 +12,30 @@ length of the list will be divisible by 3. You must allocate those
 numbers into 3 bins with the following restrictions:
 
 1.  Each input value can only be assigned once. I.e., if there is only a
-    > single “1” in the input, you can only have a single “1” in one of
-    > the bins. If there are eleven instances of “1” in the input, you
-    > can place eleven 1s into whichever bins you like.
+    single “1” in the input, you can only have a single “1” in one of
+    the bins. If there are eleven instances of “1” in the input, you
+    can place eleven 1s into whichever bins you like.
 
 2.  Each bin must have an equal number of values.
 
 Each of the three bins has different rules for scoring:
 
 1.  Bin \#1: the scoring function is to alternately add and subtract the
-    > values in the bin.
+    values in the bin.
 
 2.  Bin \#2: for every pair of numbers at positions *i* and *i+1*, if
-    > the value at position i+1 is larger than position i, it scores +3.
-    > If the value at position i+1 is equal to the value at position i,
-    > it scores +5. If the value at position i+1 is smaller than at
-    > position i, it scores -10.
+    the value at position i+1 is larger than position i, it scores +3.
+    If the value at position i+1 is equal to the value at position i,
+    it scores +5. If the value at position i+1 is smaller than at
+    position i, it scores -10.
 
 3.  Bin \#3: (positive) prime numbers in the first half of this bin
-    > score +4, all negatives values score -2, while composite positives
-    > score negative whatever their value is. For the second half of the
-    > bin, these values are inverted: primes scores -4, negatives score
-    > +2, and composite positives score whatever their value is. In the
-    > event of an odd number length, the value exactly in the middle is
-    > ignored.
+    score +4, all negatives values score -2, while composite positives
+    score negative whatever their value is. For the second half of the
+    bin, these values are inverted: primes scores -4, negatives score
+    +2, and composite positives score whatever their value is. In the
+    event of an odd number length, the value exactly in the middle is
+    ignored.
 
 Example input:
 
@@ -165,18 +165,18 @@ used to evaluate your program in the analysis section.
 =========
 
 1.  For stopping within the required time, if you go over by a small
-    > amount that is ok. You can implement the stopping criteria as if
-    > there is still time remaining, do another restart of the hill
-    > climbing algorithm. Hill climbing is typically fast, so if you go
-    > over by more than 0.1 seconds we’ll be grumpy.
+    amount that is ok. You can implement the stopping criteria as if
+    there is still time remaining, do another restart of the hill
+    climbing algorithm. Hill climbing is typically fast, so if you go
+    over by more than 0.1 seconds we’ll be grumpy.
 
 2.  This assignment is much less specified than assignment \#1, and more
-    > details are left to your discretion and experimentation.
+    details are left to your discretion and experimentation.
 
 3.  More analysis is expected in this assignment.
 
 4.  Part of your score will be based on the quality of the solutions
-    > your simulated annealing and genetic algorithm find to our test
-    > problems.
+    your simulated annealing and genetic algorithm find to our test
+    problems.
 
 

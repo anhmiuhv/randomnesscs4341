@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from random import randint
-import random
 from math import sqrt
 
 import argparse
@@ -74,29 +73,14 @@ class State:
             else:
                 score3 = score3 + int(self.bin3[i])
         return score1 + score2 + score3
+    
     def isLegal(self):
         if (len(self.bin1) == len(self.bin2)) and (len(self.bin1) == len(self.bin3)) and (len(self.bin3) == len(self.bin2)):
             return True
         return False
 
-temp_l = list(l)
-temp_l_rd = temp_l
-temp_l_rd = random.shuffle(temp_l)
-print(l)
-print(temp_l)
-bin1 = []
-bin2 = []
-bin3 = []
 
-for i in range(0,len(temp_l)):
-    if i % 3 == 0:
-        bin1.append(temp_l[i])
-    elif i % 3 == 1:
-        bin2.append(temp_l[i])
-    else:
-        bin3.append(temp_l[i])
-
-test = State(bin1,bin2,bin3)
+test = State()
 
 print(test.bin1)
 print(test.bin2)

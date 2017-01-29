@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from random import randint
+from random import shuffle
 from math import sqrt
 from math import ceil
 
@@ -40,10 +41,15 @@ class State:
         self.bin3 = list(bin3)
         if (not bin1):
             temp_l = list(l)
-            while (temp_l):
-                self.bin1.append(int(temp_l.pop(randint(0, len(temp_l) - 1))))
-                self.bin2.append(int(temp_l.pop(randint(0, len(temp_l) - 1))))
-                self.bin3.append(int(temp_l.pop(randint(0, len(temp_l) - 1))))
+            shuffle(temp_l)
+            for i in range(0,len(temp_l)):
+                if i % 3 == 0:
+                    self.bin1.append(int(temp_l[i]))
+                elif i % 3 == 1:
+                    self.bin2.append(int(temp_l[i]))
+                else:
+                    self.bin3.append(int(temp_l[i]))
+
     def score(self):
         score1 = 0
         score2 = 0

@@ -24,7 +24,7 @@ f.close()
 def isPrime(num):
     ret = True
     if num == 0 or num == 1:
-        return True
+        return False
     for i in range(2, int(sqrt(num)) + 1):
         if num % i == 0:
             return False

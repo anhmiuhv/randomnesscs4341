@@ -62,10 +62,10 @@ class State:
         for i in range(0, int(len(self.bin3)/2)):
             if self.bin3[i] < 0:
                 score3 = score3 - 2
-            elif isPrime(int(self.bin3[i])):
+            elif isPrime(self.bin3[i]):
                 score3 = score3 + 4
             else:
-                score3 = score3 - int(self.bin3[i])
+                score3 = score3 - self.bin3[i]
         for i in range(int(ceil(len(self.bin3)/2)), len(self.bin3)):
             if self.bin3[i] < 0:
                 score3 = score3 + 2

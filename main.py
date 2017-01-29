@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from random import randint
+import random
 from math import sqrt
+
 import argparse
 
 
@@ -48,7 +50,7 @@ class State:
         score3 = 0
         sign = 1
         for num in self.bin1:
-            score1 = score1 + num*sign
+            score1 = score1 + int(num)*sign
             sign = sign*-1
         for i in range(0, len(self.bin2) - 1):
             if self.bin2[i+1] > self.bin2[i]:
@@ -58,25 +60,48 @@ class State:
             else:
                 score2 = score2 - 10
         for i in range(0, int(len(self.bin3)/2)):
-            if self.bin3[i] < 0:
+            if int(self.bin3[i]) < 0:
                 score3 = score3 - 2
-            elif isPrime(self.bin3[i]):
+            elif isPrime(int(self.bin3[i])):
                 score3 = score3 + 4
             else:
-                score3 = score3 - self.bin3[i]
+                score3 = score3 - int(self.bin3[i])
         for i in range(int(len(self.bin3)/2+1), len(self.bin3)):
-            if self.bin3[i] < 0:
+            if int(self.bin3[i]) < 0:
                 score3 = score3 + 2
-            elif isPrime(self.bin3[i]):
+            elif isPrime(int(self.bin3[i])):
                 score3 = score3 - 4
             else:
-                score3 = score3 + self.bin3[i]
+                score3 = score3 + int(self.bin3[i])
         return score1 + score2 + score3
+    def isLegal(self):
+        if (len(self.bin1) == len(self.bin2)) and (len(self.bin1) == len(self.bin3)) and (len(self.bin3) == len(self.bin2)):
+            return True
+        return False
 
-#test = State()
-#print(test.bin1)
-#print(test.bin2)
-#print(test.bin3)
-#print(test.score())
+temp_l = list(l)
+temp_l_rd = temp_l
+temp_l_rd = random.shuffle(temp_l)
+print(l)
+print(temp_l)
+bin1 = []
+bin2 = []
+bin3 = []
+
+for i in range(0,len(temp_l)):
+    if i % 3 == 0:
+        bin1.append(temp_l[i])
+    elif i % 3 == 1:
+        bin2.append(temp_l[i])
+    else:
+        bin3.append(temp_l[i])
+
+test = State(bin1,bin2,bin3)
+
+print(test.bin1)
+print(test.bin2)
+print(test.bin3)
+print(test.isLegal())
+print(test.score())
 
 

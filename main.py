@@ -102,17 +102,53 @@ class State:
         if (len(self.bin1) == len(other.bin1)) and (len(self.bin2) == len(other.bin2)) and (len(self.bin3) == len(other.bin3)):
             return other.dic == self.dic
         return False
+    
+    def newState(self):
+        one = randint(1,3)
+        two = randint(1,3)
+        bin1 = list(self.bin1)
+        bin2 = list(self.bin2)
+        bin3 = list(self.bin3)
+        if one == 1:
+            binone = bin1
+        elif one == 2:
+            binone = bin2
+        else:
+            binone = bin3
+        if two == 1:
+            bintwo = bin1
+        elif two == 2:
+            bintwo = bin2
+        else:
+            bintwo = bin3
+        i, j = randint(1, len(bin1) - 1), randint(1, len(bin1) - 1)
+        temp = binone[i]
+        binone[i] = bintwo[j]
+        bintwo[j] = temp
+        return State(bin1, bin2, bin3)
+
+
 
 
 test = State()
 
-def genetics(size, elite, mutation):
 
+def genetics(size, elite, mutation):
+    return 1
 
 print(test.bin1)
 print(test.bin2)
 print(test.bin3)
 print(test.isLegal())
 print(test.score())
+
+for i in range(1,20):
+    test = test.newState()
+    print(test.bin1)
+    print(test.bin2)
+    print(test.bin3)
+    print(test.isLegal())
+    print(test.score())
+
 
 

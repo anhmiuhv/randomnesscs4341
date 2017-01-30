@@ -34,12 +34,15 @@ def isPrime(num):
             return False
     return ret
 
+neginf = -1000000 # negative infinity
+inf = 1000000   # positive infinity
 
 class State:
     def __init__(self, bin1 = [], bin2 = [], bin3 = []):
         self.bin1 = list(bin1)
         self.bin2 = list(bin2)
         self.bin3 = list(bin3)
+        self.dic = {}
         if (not bin1):
             temp_l = list(l)
             shuffle(temp_l)
@@ -50,6 +53,14 @@ class State:
                     self.bin2.append(int(temp_l[i]))
                 else:
                     self.bin3.append(int(temp_l[i]))
+        for i in range(-9, 10):
+            self.dic[i] = 0
+        for i in self.bin1:
+            self.dic[i] += 1
+        for i in self.bin2:
+            self.dic[i] += 1
+        for i in self.bin3:
+            self.dic[i] += 1
 
     def score(self):
         score1 = 0
@@ -87,8 +98,16 @@ class State:
             return True
         return False
 
+    def __eq__(self, other):
+        if (len(self.bin1) == len(other.bin1)) and (len(self.bin2) == len(other.bin2)) and (len(self.bin3) == len(other.bin3)):
+            return other.dic == self.dic
+        return False
+
 
 test = State()
+
+def genetics(size, elite, mutation):
+
 
 print(test.bin1)
 print(test.bin2)

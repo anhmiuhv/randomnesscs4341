@@ -57,3 +57,19 @@ def genetics(test, size, elite, mutation,ti):
             
 
     return popu[-1]
+
+
+def hillclimbing(state, maxiteration):
+    counttime = 0
+    currentState = state
+    
+    while(counttime < maxiteration):
+        nextState = currentState.newState()
+        if (nextState.score() > currentState.score()):
+            currentState = nextState
+            counttime = 0
+        else:
+            counttime += 1
+    
+    return currentState
+        

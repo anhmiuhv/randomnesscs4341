@@ -30,10 +30,20 @@ test = state.State(l=l)
 #20 1 worse
 #
 
-n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
+# Testing for genetics
+# n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
+# 
+# print(n.toList())
+# print(n.sc)
+# print(test.sc)
+
+# Testing for hill climbing
+n = method.hillclimbing(test, args.time)
 print(n.toList())
-print(n.sc)
-print(test.sc)
+print(n.score())
+print(test.score())
+
+
 # print(test.bin1)
 # print(test.bin2)
 # print(test.bin3)

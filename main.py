@@ -22,7 +22,15 @@ for line in f.readlines():
 f.close()
 
 test = state.State(l=l)
-n = method.genetics(test, size = 100, elite = 0.4, mutation=0.4, ti=args.time)
+#20 0.2
+#200 0.2
+#1000 0.2
+
+#200 1 bad
+#20 1 worse
+#
+
+n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
 print(n.toList())
 print(n.sc)
 print(test.sc)

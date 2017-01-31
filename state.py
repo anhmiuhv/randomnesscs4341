@@ -11,7 +11,6 @@ class State:
         self.dic = {}
         if (not bin1):
             temp_l = list(l)
-            shuffle(temp_l)
             for i in range(0,len(temp_l)):
                 if i % 3 == 0:
                     self.bin1.append(int(temp_l[i]))
@@ -94,7 +93,11 @@ class State:
             bintwo = bin2
         else:
             bintwo = bin3
-        i, j = randint(1, len(bin1) - 1), randint(1, len(bin1) - 1)
+        i, j = randint(0, len(bin1) - 2), randint(0, len(bin1) - 1)
+        if i == j:
+            i+=1
+        else:
+            i,j = j,i
         temp = binone[i]
         binone[i] = bintwo[j]
         bintwo[j] = temp

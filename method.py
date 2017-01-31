@@ -3,6 +3,7 @@ import random
 import helper
 from random import randint
 import time
+import math
 def reproduce(x, y):
     #apply PMX accourding to wikipedia
     size = x.length
@@ -61,7 +62,7 @@ def genetics(test, size, elite, mutation,ti):
 
 def hillclimbing(state, maxiteration):
     potentialSolution = []
-    countSolution = 0;
+    countSolution = 0
     countTime = 0
     currentState = state
     
@@ -85,3 +86,44 @@ def hillclimbing(state, maxiteration):
             bestSolution = potentialSolution[i]
 
     return bestSolution
+
+def annealing(state, maxiteration, maxtemp):
+    potentialSolution = []
+    countSolution = 0
+    countTime = 0
+    countTemp = 0
+    currentState = state
+    
+    while(countSolution < maxiteration):
+        nextState = currentState.newState()
+        delta = nextState.score()- currentState.score()
+        if (delta > 0):
+            currentState = nextState
+            countTemp += 1
+            countTime = 0
+        else:
+            temperature = (maxtemp - countTemp)
+            if (temperature <= 0):
+                temperature = 0.1
+            probabilitytaken = math.exp(delta/temperature)
+            
+            if (random.random() < probabilitytaken):
+                currentState = nextState
+                countTemp += 1
+            
+            countTime += 1
+            
+        
+        if (countTime == 100):
+            countTime = 0
+            countSolution +=1
+            potentialSolution.append(currentState)
+            currentState = state.shuffle()
+    
+    bestSolution = potentialSolution[0]
+    for i in range(0, len(potentialSolution)):
+        if (potentialSolution[i].score() > bestSolution.score()):                
+            bestSolution = potentialSolution[i]
+
+    return bestSolution
+

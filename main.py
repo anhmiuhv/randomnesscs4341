@@ -38,10 +38,14 @@ test = state.State(l=l)
 # print(test.sc)
 
 # Testing for hill climbing
-n = method.hillclimbing(test, 10)
+# n = method.hillclimbing(test, 10)
+# print(n.toList())
+# print(n.score())
+
+# Testing for annealing climbing
+n = method.annealing(test, 10, 100)
 print(n.toList())
 print(n.score())
-
 
 
 

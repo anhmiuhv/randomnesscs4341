@@ -27,6 +27,7 @@ class State:
             self.dic[i] += 1
         for i in self.bin3:
             self.dic[i] += 1
+        self.length = len(self.bin1) * 3
     
     def setscore(self):
         self.sc = self.score()
@@ -71,6 +72,9 @@ class State:
         if (len(self.bin1) == len(other.bin1)) and (len(self.bin2) == len(other.bin2)) and (len(self.bin3) == len(other.bin3)):
             return other.dic == self.dic
         return False
+    
+    def toList(self):
+        return self.bin1 + self.bin2 + self.bin3
     
     def newState(self):
         one = randint(1,3)

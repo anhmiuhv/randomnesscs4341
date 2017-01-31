@@ -38,10 +38,11 @@ test = state.State(l=l)
 # print(test.sc)
 
 # Testing for hill climbing
-n = method.hillclimbing(test, args.time)
+n = method.hillclimbing(test, 10)
 print(n.toList())
 print(n.score())
-print(test.score())
+
+
 
 
 # print(test.bin1)

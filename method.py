@@ -60,16 +60,28 @@ def genetics(test, size, elite, mutation,ti):
 
 
 def hillclimbing(state, maxiteration):
-    counttime = 0
+    potentialSolution = []
+    countSolution = 0;
+    countTime = 0
     currentState = state
     
-    while(counttime < maxiteration):
+    while(countSolution < maxiteration):
         nextState = currentState.newState()
         if (nextState.score() > currentState.score()):
             currentState = nextState
-            counttime = 0
+            countTime = 0
         else:
-            counttime += 1
+            countTime += 1
+            
+        if (countTime == 100):
+            countTime = 0
+            countSolution +=1
+            potentialSolution.append(currentState)
+            currentState = state.shuffle()
     
-    return currentState
-        
+    bestSolution = potentialSolution[0]
+    for i in range(0, len(potentialSolution)):
+        if (potentialSolution[i].score() > bestSolution.score()):                
+            bestSolution = potentialSolution[i]
+
+    return bestSolution

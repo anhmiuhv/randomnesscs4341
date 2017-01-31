@@ -1,5 +1,6 @@
 from random import randint
 from random import shuffle
+import random
 from math import ceil
 from helper import isPrime
 
@@ -102,3 +103,10 @@ class State:
         binone[i] = bintwo[j]
         bintwo[j] = temp
         return State(bin1, bin2, bin3)
+
+    def shuffle(self):
+        
+        temp_l = list(self.bin1)+list(self.bin2)+list(self.bin3)
+        temp_l_rd = random.shuffle(temp_l)
+        shuffleState = State(l=temp_l)
+        return shuffleState

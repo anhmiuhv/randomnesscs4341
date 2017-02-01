@@ -32,7 +32,7 @@ test = state.State(l=l)
 
 #Testing for genetics
 if args.optimization == "ga":
-    n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
+    n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)
     print(n.toList())
     print(n.sc)
     print(test.sc)
@@ -47,7 +47,7 @@ if args.optimization == "annealing":
     n = method.annealing(test, args.time, 100)
     print(n.toList())
     print(n.score())
-    print(test.sc)
+    print(test.score())
     
 if args.optimization == "hill":
     n = method.hillclimbing(test, args.time)

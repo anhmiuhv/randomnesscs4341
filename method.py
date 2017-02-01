@@ -29,7 +29,7 @@ def reproduce(x, y):
 def genetics(test, size, elite, mutation,ti):
     popu = [test]
     for i in range(100 - 1):
-        popu.append(test.shuffle()())
+        popu.append(test.shuffle())
     for i in popu:
         i.setscore()
         

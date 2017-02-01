@@ -30,12 +30,12 @@ test = state.State(l=l)
 #20 1 worse
 #
 
-# Testing for genetics
-# n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
-# 
-# print(n.toList())
-# print(n.sc)
-# print(test.sc)
+#Testing for genetics
+if args.optimization == "ga":
+    n = method.genetics(test, size = 1000, elite = 0.5, mutation=0.5, ti=args.time)
+    print(n.toList())
+    print(n.sc)
+    print(test.sc)
 
 # Testing for hill climbing
 # n = method.hillclimbing(test, 10)
@@ -43,9 +43,18 @@ test = state.State(l=l)
 # print(n.score())
 
 # Testing for annealing climbing
-n = method.annealing(test, 10, 100)
-print(n.toList())
-print(n.score())
+if args.optimization == "annealing":
+    n = method.annealing(test, args.time, 100)
+    print(n.toList())
+    print(n.score())
+    print(test.sc)
+    
+if args.optimization == "hill":
+    n = method.hillclimbing(test, args.time)
+    print(n.toList())
+    print(n.score())
+    print(test.score())
+
 
 
 

@@ -29,7 +29,7 @@ def reproduce(x, y):
 def genetics(test, size, elite, mutation,ti):
     popu = [test]
     for i in range(100 - 1):
-        popu.append(test.newState())
+        popu.append(test.shuffle()())
     for i in popu:
         i.setscore()
         
@@ -60,13 +60,13 @@ def genetics(test, size, elite, mutation,ti):
     return popu[-1]
 
 
-def hillclimbing(state, maxiteration):
+def hillclimbing(state, ti):
     potentialSolution = []
     countSolution = 0
     countTime = 0
     currentState = state
-    
-    while(countSolution < maxiteration):
+    t = time.time()
+    while(time.time() - t < ti):
         nextState = currentState.newState()
         if (nextState.score() > currentState.score()):
             currentState = nextState
@@ -87,14 +87,14 @@ def hillclimbing(state, maxiteration):
 
     return bestSolution
 
-def annealing(state, maxiteration, maxtemp):
+def annealing(state, ti, maxtemp):
     potentialSolution = []
     countSolution = 0
     countTime = 0
     countTemp = 0
     currentState = state
-    
-    while(countSolution < maxiteration):
+    t =  time.time()
+    while(time.time() - t < ti):
         nextState = currentState.newState()
         delta = nextState.score()- currentState.score()
         if (delta > 0):

@@ -110,5 +110,8 @@ class State:
 
     def shuffle(self):
         temp_l = list(self.bin1)+list(self.bin2)+list(self.bin3)
-        shuffleState = State(l=temp_l)
+        size = self.length
+        random.shuffle(temp_l)
+#         shuffleState = State(l=temp_l)
+        shuffleState = State(bin1=temp_l[:size//3], bin2=temp_l[size//3:size//3*2], bin3=temp_l[size//3*2:])
         return shuffleState

@@ -36,7 +36,7 @@ def genetics(test, size, elite, mutation,ti):
         popu.append(test.shuffle())
     for i in popu:
         i.setscore()
-
+        
     popu.sort(key=lambda x: x.sc)
 
     def random_selection():

@@ -2,7 +2,7 @@
 import state
 import method
 import argparse
-
+import cProfile
 
 #parsing option from users
 parser = argparse.ArgumentParser(description='we trust in probability')
@@ -32,10 +32,11 @@ test = state.State(l=l)
 
 #Testing for genetics
 if args.optimization == "ga":
-    n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)
+    cProfile.run("n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)")
+    
     print(n.toList())
     print(n.sc)
-    print(test.sc)
+    print(test.score())
 
 # Testing for hill climbing
 # n = method.hillclimbing(test, 10)
@@ -44,7 +45,7 @@ if args.optimization == "ga":
 
 # Testing for annealing climbing
 if args.optimization == "annealing":
-    n = method.annealing(test, args.time, 100)
+    cProfile.run("n = method.annealing(test, args.time, 1000)")
     print(n.toList())
     print(n.score())
     print(test.score())

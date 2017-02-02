@@ -19,6 +19,12 @@ class State:
                     self.bin2.append(int(temp_l[i]))
                 else:
                     self.bin3.append(int(temp_l[i]))
+
+        self.length = len(self.bin1) * 3
+    def setscore(self):
+        self.sc = self.score()
+
+    def getdic(self):
         for i in range(-9, 10):
             self.dic[i] = 0
         for i in self.bin1:
@@ -27,10 +33,8 @@ class State:
             self.dic[i] += 1
         for i in self.bin3:
             self.dic[i] += 1
-        self.length = len(self.bin1) * 3
+        return self.dic
 
-    def setscore(self):
-        self.sc = self.score()
 
     def score(self):
         score1 = 0

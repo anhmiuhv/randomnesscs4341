@@ -22,31 +22,31 @@ def reproduce(x, y):
             continue
         l3.append(j)
         d[j] -= 1
-    
+
     return state.State(bin1=l3[0:size//3], bin2=l3[size//3:size//3*2], bin3=l3[size//3*2:])
-    
-    
-    
+
+
+
 def genetics(test, size, elite, mutation,ti):
     global dic
     popu = [test]
     dic = test.getdic()
-    
+
     for i in range(100 - 1):
         popu.append(test.shuffle())
     for i in popu:
         i.setscore()
-        
+
     popu.sort(key=lambda x: x.sc)
-    
+
     def random_selection():
         length = len(popu)
         choosen = length * (1 - elite)
         c1 = randint(int(choosen), length - 1)
         return popu[c1]
-        
-            
-    t = time.time()    
+
+
+    t = time.time()
     while(time.time() - t < ti):
         new_population = []
         for i in range(size):
@@ -59,8 +59,8 @@ def genetics(test, size, elite, mutation,ti):
             child.setscore()
         popu = new_population
         popu.sort(key=lambda x: x.sc)
-            
-    
+
+
     return popu[-1]
 
 
@@ -69,24 +69,26 @@ def hillclimbing(state, ti):
     countSolution = 0
     countTime = 0
     currentState = state
+    potentialSolution.append(currentState)
     t = time.time()
     while(time.time() - t < ti):
+        currentState = potentialSolution.pop()
         nextState = currentState.newState()
         if (nextState.score() > currentState.score()):
             currentState = nextState
             countTime = 0
         else:
             countTime += 1
-            
+        potentialSolution.append(currentState)
         if (countTime == 100):
             countTime = 0
             countSolution +=1
-            potentialSolution.append(currentState)
             currentState = state.shuffle()
-    
+            potentialSolution.append(currentState)
+
     bestSolution = potentialSolution[0]
     for i in range(0, len(potentialSolution)):
-        if (potentialSolution[i].score() > bestSolution.score()):                
+        if (potentialSolution[i].score() > bestSolution.score()):
             bestSolution = potentialSolution[i]
 
     return bestSolution
@@ -98,8 +100,11 @@ def annealing(state, ti, maxtemp):
     countTemp = 0
     currentState = state
     state.setscore()
+    potentialSolution.append(currentState)
+
     t =  time.time()
     while(time.time() - t < ti):
+        currentState = potentialSolution.pop()
         nextState = currentState.newState()
         nextState.setscore()
         delta = nextState.sc- currentState.sc
@@ -112,24 +117,24 @@ def annealing(state, ti, maxtemp):
             if (temperature <= 0):
                 temperature = 0.1
             probabilitytaken = math.exp(delta/temperature)
-            
+
             if (random.random() < probabilitytaken):
                 currentState = nextState
                 countTemp += 1
-            
+
             countTime += 1
-            
-        
+
+        potentialSolution.append(currentState)
         if (countTime == 100):
             countTime = 0
             countSolution +=1
-            potentialSolution.append(currentState)
             currentState = state.shuffle()
             currentState.setscore()
-    
+            potentialSolution.append(currentState)
+
     bestSolution = potentialSolution[0]
     for i in range(0, len(potentialSolution)):
-        if (potentialSolution[i].score() > bestSolution.score()):                
+        if (potentialSolution[i].score() > bestSolution.score()):
             bestSolution = potentialSolution[i]
 
     return bestSolution

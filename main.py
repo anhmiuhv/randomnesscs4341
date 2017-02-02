@@ -3,6 +3,9 @@ import state
 import method
 import argparse
 import cProfile
+import numpy as np
+import matplotlib.pyplot as plt
+plt.rcdefaults()
 
 #parsing option from users
 parser = argparse.ArgumentParser(description='we trust in probability')
@@ -32,8 +35,8 @@ test = state.State(l=l)
 
 #Testing for genetics
 if args.optimization == "ga":
-#    cProfile.run("n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)")
-    n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)
+    
+  #    cProfile.run("n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)")
     print(n.toList())
     print(n.sc)
     print(test.score())
@@ -52,8 +55,64 @@ if args.optimization == "annealing":
     print(test.score())
     
 if args.optimization == "hill":
-    n = method.hillclimbing(test, args.time)
-    print(n.toList())
+    objects = ("0.1", "0.5", "1", "2", "5", "10", "30", "60")
+    y_pos = np.arange(len(objects))
+    result = []
+    average = []
+    for i in range(5):
+        n = method.hillclimbing(test, 0.1)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 0.5)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 1)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 2)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 5)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 10)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 30)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+    result = []
+    for i in range(5):
+        n = method.hillclimbing(test, 60)
+        result.append(n.score())
+    average.append(sum(result) / float(len(result)))
+
+
+
+
+        
+    plt.bar(y_pos, average, align='center', alpha=0.5)
+    plt.xticks(y_pos, objects)
+    plt.ylabel('Score')
+    plt.axis([0,9,0,150])
+    plt.title('Performance test')
+ 
+    plt.show()
+
+    
+    print(len(n.toList()))
     print(n.score())
     print(test.score())
 

@@ -32,8 +32,9 @@ test = state.State(l=l)
 
 #Testing for genetics
 if args.optimization == "ga":
-    cProfile.run("n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)")
     
+    cProfile.run("n = method.genetics(test, size = 100, elite = 0.2, mutation=0.5, ti=args.time)")
+     
     print(n.toList())
     print(n.sc)
     print(test.score())

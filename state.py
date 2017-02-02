@@ -58,7 +58,7 @@ class State:
                     score3 = score3 + 4
                 else:
                     score3 = score3 - self.bin3[i]
-            elif i >= int(ceil(len(self.bin3)/2) :
+            elif i >= int(ceil(len(self.bin3)/2)) :
                 if self.bin3[i] < 0:
                     score3 = score3 + 2
                 elif isPrime(self.bin3[i]):

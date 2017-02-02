@@ -97,10 +97,12 @@ def annealing(state, ti, maxtemp):
     countTime = 0
     countTemp = 0
     currentState = state
+    state.setscore()
     t =  time.time()
     while(time.time() - t < ti):
         nextState = currentState.newState()
-        delta = nextState.score()- currentState.score()
+        nextState.setscore()
+        delta = nextState.sc- currentState.sc
         if (delta > 0):
             currentState = nextState
             countTemp += 1
@@ -123,6 +125,7 @@ def annealing(state, ti, maxtemp):
             countSolution +=1
             potentialSolution.append(currentState)
             currentState = state.shuffle()
+            currentState.setscore()
     
     bestSolution = potentialSolution[0]
     for i in range(0, len(potentialSolution)):

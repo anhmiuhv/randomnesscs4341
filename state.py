@@ -28,7 +28,7 @@ class State:
         for i in self.bin3:
             self.dic[i] += 1
         self.length = len(self.bin1) * 3
-    
+
     def setscore(self):
         self.sc = self.score()
 
@@ -37,30 +37,30 @@ class State:
         score2 = 0
         score3 = 0
         sign = 1
-        for num in self.bin1:
-            score1 = score1 + num*sign
+        for i in range(0, len(self.bin1)):
+            score1 = score1 + self.bin1[i]*sign
             sign = sign*-1
-        for i in range(0, len(self.bin2) - 1):
-            if self.bin2[i+1] > self.bin2[i]:
-                score2 = score2 + 3
-            elif self.bin2[i+1] == self.bin2[i]:
-                score2 = score2 + 5
-            else:
-                score2 = score2 - 10
-        for i in range(0, int(len(self.bin3)/2)):
-            if self.bin3[i] < 0:
-                score3 = score3 - 2
-            elif isPrime(self.bin3[i]):
-                score3 = score3 + 4
-            else:
-                score3 = score3 - self.bin3[i]
-        for i in range(int(ceil(len(self.bin3)/2)), len(self.bin3)):
-            if self.bin3[i] < 0:
-                score3 = score3 + 2
-            elif isPrime(self.bin3[i]):
-                score3 = score3 - 4
-            else:
-                score3 = score3 + self.bin3[i]
+            if (i != len(self.bin1) - 1):
+                if self.bin2[i+1] > self.bin2[i]:
+                    score2 = score2 + 3
+                elif self.bin2[i+1] == self.bin2[i]:
+                    score2 = score2 + 5
+                else:
+                    score2 = score2 - 10
+            if i < int(len(self.bin3)/2):
+                if self.bin3[i] < 0:
+                    score3 = score3 - 2
+                elif isPrime(self.bin3[i]):
+                    score3 = score3 + 4
+                else:
+                    score3 = score3 - self.bin3[i]
+            elif i >= int(ceil(len(self.bin3)/2) :
+                if self.bin3[i] < 0:
+                    score3 = score3 + 2
+                elif isPrime(self.bin3[i]):
+                    score3 = score3 - 4
+                else:
+                    score3 = score3 + self.bin3[i]
         return score1 + score2 + score3
 
     def isLegal(self):
@@ -72,10 +72,10 @@ class State:
         if (len(self.bin1) == len(other.bin1)) and (len(self.bin2) == len(other.bin2)) and (len(self.bin3) == len(other.bin3)):
             return other.dic == self.dic
         return False
-    
+
     def toList(self):
         return self.bin1 + self.bin2 + self.bin3
-    
+
     def newState(self):
         one = randint(1,3)
         two = randint(1,3)

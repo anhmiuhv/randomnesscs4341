@@ -4,30 +4,34 @@ import helper
 from random import randint
 import time
 import math
+dic = {}
+
 def reproduce(x, y):
     #apply PMX accourding to wikipedia
     size = x.length
-    cxpoint1 = randint(1, size)
+    cxpoint1 = randint(0, size)
     l1 =  x.toList()
     l2 = y.toList()
     l3 = list(l1[0:cxpoint1])
-    dic = dict(x.dic)
+    d = dict(dic)
     for i in l3:
-        dic[i] -= 1
-    count = cxpoint1
+        d[i] -= 1
     for i in range(size):
         j = l2[i]
-        if dic[j] == 0:
+        if d[j] == 0:
             continue
         l3.append(j)
-        dic[j] -= 1
+        d[j] -= 1
     
     return state.State(bin1=l3[0:size//3], bin2=l3[size//3:size//3*2], bin3=l3[size//3*2:])
     
     
     
 def genetics(test, size, elite, mutation,ti):
+    global dic
     popu = [test]
+    dic = test.getdic()
+    
     for i in range(100 - 1):
         popu.append(test.shuffle())
     for i in popu:
@@ -53,10 +57,10 @@ def genetics(test, size, elite, mutation,ti):
                 child = child.newState()
             new_population.append(child)
             child.setscore()
-        popu.extend(new_population)
+        popu = new_population
         popu.sort(key=lambda x: x.sc)
             
-
+    
     return popu[-1]
 
 

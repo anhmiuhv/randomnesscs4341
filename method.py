@@ -93,7 +93,7 @@ def hillclimbing(state, ti):
 
     return bestSolution
 
-def annealing(state, ti, maxtemp):
+def annealing(state, ti, maxtemp, scale):
     potentialSolution = []
     countSolution = 0
     countTime = 0
@@ -107,15 +107,15 @@ def annealing(state, ti, maxtemp):
         currentState = potentialSolution.pop()
         nextState = currentState.newState()
         nextState.setscore()
-        delta = nextState.sc- currentState.sc
+        delta = (nextState.sc- currentState.sc)*scale
+        temperature = (maxtemp - countTemp)
         if (delta > 0):
             currentState = nextState
             countTemp += 1
             countTime = 0
         else:
-            temperature = (maxtemp - countTemp)
-            if (temperature <= 0):
-                temperature = 0.1
+            
+            
             probabilitytaken = math.exp(delta/temperature)
 
             if (random.random() < probabilitytaken):
@@ -125,7 +125,9 @@ def annealing(state, ti, maxtemp):
             countTime += 1
 
         potentialSolution.append(currentState)
-        if (countTime == 100):
+        if ((countTime == 100)or(temperature <= 1)):
+            countTemp = 0
+            temperature = maxtemp
             countTime = 0
             countSolution +=1
             currentState = state.shuffle()

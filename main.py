@@ -45,8 +45,7 @@ if args.optimization == "ga":
 
 # Testing for annealing climbing
 if args.optimization == "annealing":
-#    cProfile.run("n = method.annealing(test, args.time, 1000)")
-    n = method.annealing(test, args.time, 1000)
+    n = method.annealing(test, args.time, 200*test.length/9, 50*test.length/9)
     print(n.toList())
     print(n.score())
     print(test.score())
